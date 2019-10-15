@@ -141,7 +141,7 @@ Resources:
             Ref: AWS::Region
         - Name: REPOSITORY_URI
           Value:
-            Fn::Sub: ${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/${Repository}
+            Fn::Sub: ${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/${Fn::ImportValue: Rep}
       Name:
         Ref: AWS::StackName
       ServiceRole:
@@ -204,8 +204,7 @@ Resources:
             Provider: ECS
           Configuration:
             ClusterName:
-              Ref:
-                Fn::ImportValue: ClusterECS
+              Fn::ImportValue: ClusterECS
             ServiceName:
               Fn::ImportValue: ServiceECS
             FileName: images.json
